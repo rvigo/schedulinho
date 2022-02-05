@@ -2,7 +2,7 @@ import importlib
 import logging
 from typing import List
 
-from entities import Job
+from entities import Job, Schedule
 
 
 class ZeroJobsToEnableException(Exception):
@@ -24,9 +24,6 @@ class Enabler:
             self._job_object_list.append(job)
             self.log.debug(f'registering new job: {job}')
 
-    def register_jobs(self, job_object):
-        self._register_jobs([job_object])
-
     @property
     def jobs(self) -> List[Job]:
         return self._jobs
@@ -47,8 +44,7 @@ class Enabler:
         '''dynamically create job instance'''
         try:
             classname = job.get('name')
-            schedule = job.get('schedule')
-            delay = job.get('delay', 0)
+            schedule: dict = job.get('schedule')
             priority = job.get('priority', 0)
 
             mod = importlib.import_module(
@@ -56,9 +52,15 @@ class Enabler:
             _class = getattr(mod, self.__to_camel_case(classname))
 
             _job: Job = _class()
-            _job.schedule = schedule
-            _job.delay = delay
             _job.priority = priority
+            _interval = schedule.get('interval')
+            _time_unit = schedule.get('time_unit', 's')
+            _delay = schedule.get('delay', 0)
+
+            _schedule: Schedule = Schedule(
+                interval=_interval, time_unit=_time_unit, delay=_delay)
+
+            _job.schedule = _schedule
 
             return _job
         except Exception as e:
