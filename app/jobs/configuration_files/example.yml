@@ -1,0 +1,5 @@
+job:
+  name: example
+  schedule:
+    time_unit: d
+    interval: 10
