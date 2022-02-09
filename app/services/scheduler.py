@@ -23,9 +23,10 @@ class Scheduler:
 
     def _schedule_first_run(self, job: Job) -> Job:
         now = datetime.now()
-        job.last_run = now.replace(microsecond=0)
-        job.next_run = job.last_run + timedelta(seconds=job.delay)
-        self.log.info(f'next run in {str(job.next_run)}')
+        job.schedule.last_run = now.replace(microsecond=0)
+        job.schedule.next_run = job.schedule.last_run + \
+            timedelta(seconds=job.schedule.delay)
+        self.log.info(f'next run in {str(job.schedule.next_run)}')
         return job
 
     def prepare_to_run(self) -> None:
@@ -46,10 +47,11 @@ class Scheduler:
 
     def _schedule_last_and_next_run(self, job: Job) -> Job:
         now = datetime.now()
-        job.last_run = now.replace(microsecond=0)
-        job.next_run = job.last_run + timedelta(seconds=job.schedule)
-        self.log.info(f'next run in {str(job.next_run)}')
+        job.schedule.last_run = now.replace(microsecond=0)
+        job.schedule.next_run = job.schedule.last_run + \
+            timedelta(seconds=job.schedule.offset)
+        self.log.info(f'next run in {str(job.schedule.next_run)}')
         return job
 
     def _should_run(self, job: Job) -> bool:
-        return datetime.now() >= job.next_run
+        return datetime.now() >= job.schedule.next_run
