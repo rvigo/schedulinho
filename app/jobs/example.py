@@ -1,5 +1,5 @@
 import logging
-from datetime import date, datetime
+from datetime import datetime
 
 from entities import Job
 from utils.asyncfy import asyncfy
@@ -12,5 +12,4 @@ class Example(Job):
 
     @asyncfy
     def execute(self):
-
         self.log.info(datetime.now())

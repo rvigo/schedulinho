@@ -2,9 +2,14 @@ from datetime import datetime
 
 
 class Schedule:
-    TIME_UNIT_MAP = [('s', 'seconds'), ('m', 'minutes'),
-                     ('h', 'hours'), ('d', 'days')]
-    TIME_UNIT_CONVERSION_MAP = {'s': 1, 'm': 60, 'h': 3600, 'd': 86400}
+    TIME_UNIT_MAP = [('s', 'seconds'),
+                     ('m', 'minutes'),
+                     ('h', 'hours'),
+                     ('d', 'days')]
+    TIME_UNIT_CONVERSION_MAP = {'s': 1,
+                                'm': 60,
+                                'h': 3600,
+                                'd': 86400}
 
     def __init__(self, interval, time_unit, delay) -> None:
         self.interval = interval
