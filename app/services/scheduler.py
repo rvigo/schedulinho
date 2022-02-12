@@ -15,7 +15,6 @@ class Scheduler:
         self.log = logging.getLogger()
         self.jobs: List[Job] = []
         self.runnables: List[Job] = []
-        self._priority = {}
 
     def schedule(self, jobs: List[Job]) -> None:
         [self.jobs.append(self._schedule_first_run(job))
@@ -30,7 +29,7 @@ class Scheduler:
             f'job: {job.__class__.__name__} - next run in {str(job.schedule.next_run)}')
         return job
 
-    def prepare_to_run(self) -> None:
+    def _prepare_to_run(self) -> None:
         self.runnables.clear()
 
         for job in self.jobs:

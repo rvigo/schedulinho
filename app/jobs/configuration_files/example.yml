@@ -1,5 +1,7 @@
 job:
   name: example
   schedule:
-    time_unit: d
-    interval: 10
+    time_unit: c
+    interval: "38 18 * * wed"
+    # time_unit: m
+    # interval: 5

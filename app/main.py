@@ -20,7 +20,6 @@ async def main():
         scheduler.schedule(enabler.jobs)
         while True:
             try:
-                scheduler.prepare_to_run()
                 await scheduler.run()
                 log.info('waiting for next run')
             except NoJobsToRunException:

@@ -57,7 +57,8 @@ class Enabler:
             time_unit = schedule.get('time_unit', 's')
             delay = schedule.get('delay', 0)
 
-            _schedule = Schedule(interval=interval, time_unit=time_unit, delay=delay)
+            _schedule = Schedule(
+                interval=interval, time_unit=time_unit, delay=delay)
 
             job.schedule = _schedule
 
