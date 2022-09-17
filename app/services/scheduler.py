@@ -26,7 +26,8 @@ class Scheduler:
         job.schedule.last_run = now.replace(microsecond=0)
         job.schedule.next_run = job.schedule.last_run + \
             timedelta(seconds=job.schedule.delay)
-        self.log.info(f'next run in {str(job.schedule.next_run)}')
+        self.log.info(
+            f'job: {job.__class__.__name__} - next run in {str(job.schedule.next_run)}')
         return job
 
     def prepare_to_run(self) -> None:
@@ -50,7 +51,8 @@ class Scheduler:
         job.schedule.last_run = now.replace(microsecond=0)
         job.schedule.next_run = job.schedule.last_run + \
             timedelta(seconds=job.schedule.offset)
-        self.log.info(f'next run in {str(job.schedule.next_run)}')
+        self.log.info(
+            f'job: {job.__class__.__name__} - next run in {str(job.schedule.next_run)}')
         return job
 
     def _should_run(self, job: Job) -> bool:
