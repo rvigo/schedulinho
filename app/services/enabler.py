@@ -67,5 +67,5 @@ class Enabler:
             self.log.error(e.args[0])
             return
 
-    def __to_camel_case(self, class_name) -> str:
+    def __to_camel_case(self, class_name: str) -> str:
         return ''.join(word.title() for word in class_name.split('_'))

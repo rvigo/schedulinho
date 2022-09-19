@@ -36,7 +36,7 @@ class Scheduler:
         for job in self.jobs:
             if self._should_run(job):
                 self.runnables.append(job)
-                self._schedule_last_and_next_run(job)
+                self._schedule_next_run(job)
 
         if len(self.runnables) > 0:
             self.log.debug(f'{len(self.runnables)} runnables jobs')
@@ -46,7 +46,7 @@ class Scheduler:
     async def run(self) -> List[tuple]:
         return await asyncio.gather(*[job.execute() for job in self.runnables])
 
-    def _schedule_last_and_next_run(self, job: Job) -> Job:
+    def _schedule_next_run(self, job: Job) -> Job:
         now = datetime.now()
         job.schedule.last_run = now.replace(microsecond=0)
         job.schedule.next_run = job.schedule.last_run + \

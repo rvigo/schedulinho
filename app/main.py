@@ -33,5 +33,4 @@ async def main():
 
 if __name__ == '__main__':
     loop = asyncio.run(main())
-    loop.close()
     log.debug('shutting down')

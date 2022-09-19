@@ -1,6 +1,6 @@
 # Schedulinho
 
-schedulinho is a simple scheduler manager with a plugin system
+schedulinho (brazilian portuguese for "little scheduler") is a simple scheduler manager with a plugin system
 
 # how to use
 - at `src/jobs`, create a python file implementing the `Job` entity

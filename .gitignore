@@ -178,10 +178,10 @@ cython_debug/
 # Support for Project snippet scope
 
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
-
-/base_image
-/python_base_image
-build_stack.sh
+/app/jobs/**/*
+!/app/jobs/example.py
+!/app/jobs/configuration_files/example.yml
 deploy.sh
+docker_deploy_args
 
 .vscode
