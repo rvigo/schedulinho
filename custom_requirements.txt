@@ -1,2 +1,1 @@
-requests
-discord-webhook
+requests==2.28.2
