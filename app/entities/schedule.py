@@ -18,8 +18,8 @@ class Schedule:
 
         # delay = in seconds
         self.delay = delay
-        self.last_run: datetime = None
-        self.next_run: datetime = None
+        self.last_run: datetime = datetime.now()
+        self.next_run: datetime = datetime.now()
 
     @property
     def offset(self) -> int:

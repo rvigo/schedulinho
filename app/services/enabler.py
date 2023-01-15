@@ -40,29 +40,28 @@ class Enabler:
             self.log.fatal('zero jobs to enable')
             raise ZeroJobsToEnableException
 
-    def __create_instance(self, job: dict) -> Job:
+    def __create_instance(self, job_dict: dict) -> Job | None:
         '''dynamically create job instance'''
         try:
-            classname = job.get('name')
-            schedule: dict = job.get('schedule')
-            priority = job.get('priority', 0)
+            classname: str = job_dict.get('name')
+            schedule = job_dict.get('schedule')
+            priority = job_dict.get('priority', 0)
 
             mod = importlib.import_module(
                 name=f'.{classname}', package=f'.{self.source_path}')
             _class = getattr(mod, self.__to_camel_case(classname))
 
-            _job: Job = _class()
-            _job.priority = priority
-            _interval = schedule.get('interval')
-            _time_unit = schedule.get('time_unit', 's')
-            _delay = schedule.get('delay', 0)
+            job: Job = _class()
+            job.priority = priority
+            interval = schedule.get('interval')
+            time_unit = schedule.get('time_unit', 's')
+            delay = schedule.get('delay', 0)
 
-            _schedule: Schedule = Schedule(
-                interval=_interval, time_unit=_time_unit, delay=_delay)
+            _schedule = Schedule(interval=interval, time_unit=time_unit, delay=delay)
 
-            _job.schedule = _schedule
+            job.schedule = _schedule
 
-            return _job
+            return job
         except Exception as e:
             self.log.error(e.args[0])
             return

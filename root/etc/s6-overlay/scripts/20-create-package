@@ -1,6 +1,0 @@
-#!/usr/bin/with-contenv sh
-echo "-----------------------------------"
-echo "creating __init__.py at jobs folder"
-echo "-----------------------------------"
-
-touch /app/jobs/__init__.py

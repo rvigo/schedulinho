@@ -1,9 +1,9 @@
-from typing import List
 import logging
-import yaml
 import os
 from pathlib import Path
-from entities.job import Job
+from typing import Any, Dict, List
+
+import yaml
 
 
 class NoConfigurationFileFound(Exception):
@@ -11,7 +11,7 @@ class NoConfigurationFileFound(Exception):
 
 
 class Loader:
-    CONFIG_DIR = 'app/jobs/configuration_files'
+    CONFIG_DIR = '/app/jobs/configuration_files'
 
     def __init__(self) -> None:
         self.log = logging.getLogger()
@@ -32,5 +32,5 @@ class Loader:
             raise NoConfigurationFileFound
 
     @property
-    def jobs(self) -> List[Job]:
+    def jobs(self) -> List[Dict[str, Any]]:
         return self.config['jobs']

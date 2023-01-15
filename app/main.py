@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import time
+
 from configs import Logger
 from services import Enabler, Loader, Scheduler
 from services.enabler import ZeroJobsToEnableException
@@ -9,7 +10,6 @@ from services.scheduler import NoJobsToRunException
 
 Logger()
 log = logging.getLogger()
-
 
 async def main():
     try:

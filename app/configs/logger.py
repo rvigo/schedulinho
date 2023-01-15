@@ -1,6 +1,8 @@
 import logging
 import os
 
+from .discord_handler import DiscordFilter, DiscordHandler
+
 
 class Logger:
     def __init__(self) -> None:
@@ -12,4 +14,8 @@ class Logger:
         logger.setLevel(log_level)
         handler = logging.StreamHandler()
         handler.setFormatter(formatter)
+        discordHandler = DiscordHandler()
+        discordFilter = DiscordFilter()
+        discordHandler.addFilter(discordFilter)
         logger.addHandler(handler)
+        logger.addHandler(discordHandler)

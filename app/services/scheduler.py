@@ -1,6 +1,6 @@
 import asyncio
-import logging
 from datetime import datetime, timedelta
+import logging
 from typing import List
 
 from entities import Job
@@ -43,8 +43,8 @@ class Scheduler:
         else:
             raise NoJobsToRunException
 
-    async def run(self) -> List[tuple]:
-        return await asyncio.gather(*[job.execute() for job in self.runnables])
+    async def run(self):
+        await asyncio.gather(*[job.execute() for job in self.runnables])
 
     def _schedule_next_run(self, job: Job) -> Job:
         now = datetime.now()

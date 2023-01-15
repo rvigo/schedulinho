@@ -1,6 +1,5 @@
 from .schedule import Schedule
 
-
 class Job:
     def __init__(self) -> None:
         self.schedule: Schedule = None
